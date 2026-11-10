@@ -1,0 +1,34 @@
+# ============================================================================
+# Curly-FM project — notebook-complete requirements
+# Install PyTorch FIRST (CPU or CUDA build from pytorch.org), then `pip install -r`.
+# ============================================================================
+
+# --------- pytorch --------- #
+torch>=2.0.0
+torchvision>=0.15.0
+
+# --------- flow matching (all three notebooks) --------- #
+torchcfm            # conditional flow matching (OT-CFM + Curly-FM building blocks)
+torchdyn            # NeuralODE integration of the learned velocity field
+torchsde            # SDE integration — ocean_currents.ipynb
+
+# --------- scientific core --------- #
+numpy
+pandas
+matplotlib
+scipy
+tqdm
+
+# --------- single-cell stack (ocean_currents.ipynb only — heavy) --------- #
+scanpy
+scvelo
+anndata
+
+# --------- training framework (only if you retrain via src/ + configs) --------- #
+lightning>=2.0.0
+torchmetrics>=0.11.4
+hydra-core==1.3.2
+hydra-colorlog==1.2.0
+hydra-optuna-sweeper==1.2.0
+rootutils
+rich

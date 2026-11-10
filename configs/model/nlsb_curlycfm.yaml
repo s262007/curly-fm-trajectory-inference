@@ -1,0 +1,25 @@
+_target_: src.models.cfm_module.CFMModule
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.0001
+  weight_decay: 0.0
+
+# Velocity field net: 100D state + time -> 100D drift
+net:
+  _target_: src.models.components.mlp.MLP
+  dim: 100
+  out_dim: 100
+  w: 256
+  time_varying: true
+
+# Geodesic / interpolant net: (x0, x1) concat + time -> 100D mu_t
+geodesic_net:
+  _target_: src.models.components.mlp.MLP
+  dim: 200
+  out_dim: 100
+  w: 256
+  time_varying: true
+
+compile: false

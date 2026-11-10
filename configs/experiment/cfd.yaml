@@ -1,0 +1,55 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /model: curlycfd      # Change to the specific model config you want
+  - override /data: cfd
+  - override /logger: wandb
+
+tags: ["cfd", "exp1"]
+
+# # Specific model hyperparameters for this experiment
+model:
+    geo_model:
+      _target_: src.models.components.resnet.ResNetMLP
+      dim: 4 
+      out_dim: 2
+      time_varying: true
+      width: 256
+
+    vel_model:
+      _target_: src.models.components.resnet.ResNetMLP
+      dim: 2 
+      out_dim: 2
+      time_varying: true
+      width: 256
+
+    score_model:
+      _target_: src.models.components.resnet.ResNetMLP
+      dim: 2 
+      out_dim: 2
+      time_varying: true
+      width: 256
+
+    sigma: 0.1
+
+    k: 20
+
+    n_times: 1
+
+    alpha: 1.0
+
+    # compile model for faster training with pytorch 2.0
+    compile: false
+
+    num_times: 1
+
+# Data module-specific configs for this experiment
+data:
+  data_dir: /slurm-storage/katpet/curly-flow-matching/data/CFD
+  batch_size: 256
+  desired_num_particles: 2000
+  seed: 42
+  dataset_name: "2DTGV"

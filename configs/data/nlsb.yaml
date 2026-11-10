@@ -1,0 +1,16 @@
+_target_: src.data.nlsb_datamodule.NLSBDataModule
+
+data_dir: "data/nlsb"
+files: ["train_rna.npz", "val_rna.npz", "test_rna.npz"]
+dim: 100
+
+# Project email instructions:
+#   snapshots 0,2,4 -> train,   snapshots 1,3 -> validation
+train_ts: [0, 2, 4]
+val_ts:   [1, 3]
+
+batch_size: 256
+num_workers: 0
+pin_memory: False
+normalise: True
+seed: 42
